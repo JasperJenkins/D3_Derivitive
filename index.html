@@ -33,26 +33,11 @@ svg.selectAll("rect")
     .attr("transform", translate)
     .attr("width", z)
     .attr("height", z)
-    .style("fill", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y); })
-    .on("mouseover", mouseover);
+    .style("fill", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y); });
 
 function translate(d) {
   return "translate(" + (d % x) * z + "," + Math.floor(d / x) * z + ")";
 }
 
-function mouseover(d) {
-  this.parentNode.appendChild(this);
-
-  d3.select(this)
-      .style("pointer-events", "none")
-    .transition()
-      .duration(750)
-      .attr("transform", "translate(480,480)scale(23)rotate(180)")
-    .transition()
-      .delay(1500)
-      .attr("transform", "translate(240,240)scale(0)")
-      .style("fill-opacity", 0)
-      .remove();
-}
 
 </script>
