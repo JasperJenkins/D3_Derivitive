@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body {
+  margin: 0;
+  }
+
+  rect {
+    stroke: rgb(0, 0, 0);
+    stroke-width: .1px;
+  }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<body>
+
+  <!-- Lets use:
+    https://bl.ocks.org/mbostock/aca51512895bd03855efa67aebec474b
+  -->
+  <div class="container">
+    <h1>A Website</h1>
+  </div>
+
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-random.v1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+  <script>
+
+    arr = nj.array([1, 2, 3, 4, 5])
+    window.alert(arr.shape)
+
+    var random = d3.randomNormal(1);
+
+    var w = 600,
+    h = 600,
+    z = 8,
+    x = w / z,
+    y = h / z;
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    svg.selectAll("rect")
+      .data(d3.range(x * y))
+        .enter().append("rect")
+        .attr("transform", translate)
+        .attr("width", z)
+        .attr("height", z)
+        .style("fill", function(d) {return d3.hsl(random() * 15 + 200, 1, Math.floor(d / x) / y); });
+
+    function translate(d) {
+      return "translate(" + (d % x) * z + "," + Math.floor(d / x) * z + ")";
+    }
+  </script>
+<body>
