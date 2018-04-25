@@ -3,41 +3,11 @@
 <title>Transform Transitions</title>
 <style>
 
-body {
-  margin: 0;
-}
-
-rect {
-  stroke: #fff;
-  stroke-width: .1px;
-}
-
 </style>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script>
 
-var w = 600,
-    h = 600,
-    z = 5,
-    x = w / z,
-    y = h / z;
+    <div id="d3_0"></div>
 
-var svg = d3.select("body").append("svg")
-    .attr("width", w)
-    .attr("height", h);
-
-svg.selectAll("rect")
-    .data(d3.range(x * y))
-  .enter().append("rect")
-    .attr("transform", translate)
-    .attr("width", z)
-    .attr("height", z)
-    .style("fill", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y); });
-
-function translate(d) {
-  return "translate(" + (d % x) * z + "," + Math.floor(d / x) * z + ")";
-}
-
-
-</script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src = "index.js"></script>
+</body>
