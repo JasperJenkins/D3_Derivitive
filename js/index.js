@@ -1,4 +1,3 @@
-alert('HALP')
 
 var rectDemo = d3.select("#d3_0").
   append("svg").
@@ -10,3 +9,5 @@ rectDemo.append("rect").
   attr("y", 100).
   attr("height", 100).
   attr("width", 200);
+
+alert('HALP')
