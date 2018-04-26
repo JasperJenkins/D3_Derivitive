@@ -16,15 +16,24 @@ d3.csv("data/data.csv", function(error, data) {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    var x = d3.scaleLinear()
+
+
+    let x = d3.scaleLinear()
         .range([0, width])
         .domain([0, d3.max(data, function(d) { return d.x;})]);
 
-    var y = d3.scaleLinear()
+    let y = d3.scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(data, function(d) { return d.y;})]);
+        .domain([-2, d3.max(data, function(d) { return d.y;}) + 2]);
 
-    circles = graph.selectAll('circle')
+    graph.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+        // Add the Y Axis
+    graph.append("g")
+        .call(d3.axisLeft(y));
+
+    let circles = graph.selectAll('circle')
       .data(data).enter().append('circle')
       .attr("cx", function(d) { return x(d.x);})
       .attr("cy", function(d) { return y(d.y);})
@@ -34,12 +43,12 @@ d3.csv("data/data.csv", function(error, data) {
 
     function grow() {
       circles
-      .transition().duration(1250)
+      .transition().duration(1000)
         .attr("r", 5)
         .attr("fill", 'red')
-      .transition().duration(1250)
-        .attr("r", 3)
-        .attr("fill", 'blue')
+      .transition().duration(1000)
+        .attr("r", 3.5)
+        .attr("fill", 'purple')
       .on("end", grow);
     };
   });
