@@ -16,9 +16,6 @@ d3.csv("data/data.csv", function(error, data) {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    circles = graph.selectAll('circle')
-      .data(data);
-
     var x = d3.scaleLinear()
         .range([0, width])
         .domain([0, d3.max(data, function(d) { return d.x;})]);
@@ -27,8 +24,22 @@ d3.csv("data/data.csv", function(error, data) {
         .range([height, 0])
         .domain([0, d3.max(data, function(d) { return d.y;})]);
 
-    circles.enter().append('circle')
+    circles = graph.selectAll('circle')
+      .data(data).enter().append('circle')
       .attr("cx", function(d) { return x(d.x);})
       .attr("cy", function(d) { return y(d.y);})
       .attr("r", function(d) { return 5});
+
+    grow();
+
+    function grow() {
+      circles
+      .transition().duration(1250)
+        .attr("r", 5)
+        .attr("fill", 'red')
+      .transition().duration(1250)
+        .attr("r", 3)
+        .attr("fill", 'blue')
+      .on("end", grow);
+    };
   });
